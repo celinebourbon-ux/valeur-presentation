@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Méthode V.A.L.E.U.R© — De la peur à la joie d'être soi</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1117;
+    --gold: #C9A84C;
+    --white: #ffffff;
+    --grey: #8b9bb4;
+    --red: #9B2335;
+    --orange: #C4622D;
+    --yellow: #C9A84C;
+    --green: #2D6A4F;
+    --blue: #1B4F72;
+    --indigo: #4A235A;
+    --violet: #7D3C98;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--navy);
+    font-family: 'Jost', sans-serif;
+    color: var(--white);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  /* SLIDES */
+  .slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.2s ease;
+  }
+
+  .slide.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* BACKGROUNDS */
+  .bg-navy { background: var(--navy); }
+  .bg-gradient-violet { background: radial-gradient(ellipse at center, #1a0d2e 0%, var(--navy) 70%); }
+  .bg-gradient-gold { background: radial-gradient(ellipse at center, #1a1206 0%, var(--navy) 70%); }
+  .bg-split {
+    background: linear-gradient(90deg, #0a0f1a 0%, #0d1117 50%, #0f1a12 100%);
+  }
+
+  /* PARTICLES */
+  .particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0;
+    animation: float linear infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.3; }
+    100% { transform: translateY(-100px) rotate(720deg); opacity: 0; }
+  }
+
+  /* TYPOGRAPHY */
+  .title-main {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    line-height: 1;
+    text-align: center;
+  }
+
+  .title-gradient {
+    background: linear-gradient(90deg, #9B2335, #C4622D, #C9A84C, #2D6A4F, #1B4F72, #4A235A, #7D3C98);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .subtitle {
+    font-family: 'Jost', sans-serif;
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
+    font-weight: 200;
+    letter-spacing: 0.3em;
+    color: var(--grey);
+    text-transform: uppercase;
+    margin-top: 20px;
+  }
+
+  .headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 4.5vw, 3.8rem);
+    font-weight: 400;
+    text-align: center;
+    line-height: 1.3;
+    color: var(--white);
+  }
+
+  .headline em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .body-text {
+    font-family: 'Jost', sans-serif;
+    font-size: clamp(1rem, 2.2vw, 1.5rem);
+    font-weight: 300;
+    text-align: center;
+    line-height: 1.9;
+    color: #c5cee0;
+    max-width: 800px;
+  }
+
+  .accent-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.4rem, 3vw, 2.4rem);
+    font-weight: 600;
+    font-style: italic;
+    color: var(--gold);
+    text-align: center;
+  }
+
+  .reveal-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    font-weight: 700;
+    text-align: center;
+    color: var(--white);
+  }
+
+  /* SPACER */
+  .spacer { height: 30px; }
+  .spacer-sm { height: 15px; }
+
+  /* LINE DIVIDER */
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 30px auto;
+    opacity: 0.6;
+  }
+
+  /* LABEL */
+  .label {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  /* MASKS GRID */
+  .masks-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 15px;
+    width: 100%;
+    max-width: 900px;
+  }
+
+  .mask-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    animation: maskReveal 0.6s ease forwards;
+    opacity: 0;
+  }
+
+  @keyframes maskReveal {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .mask-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white;
+    position: relative;
+    box-shadow: 0 0 30px currentColor;
+  }
+
+  .mask-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--grey);
+    line-height: 1.4;
+  }
+
+  /* STEPS */
+  .steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+    max-width: 750px;
+  }
+
+  .step-item {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding: 18px 25px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.03);
+    border-left: 3px solid currentColor;
+    animation: stepReveal 0.5s ease forwards;
+    opacity: 0;
+  }
+
+  @keyframes stepReveal {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .step-letter {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    min-width: 35px;
+  }
+
+  .step-content { flex: 1; }
+
+  .step-title {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .step-desc {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--grey);
+    line-height: 1.5;
+  }
+
+  /* SPLIT LAYOUT */
+  .split-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    width: 100%;
+    max-width: 1000px;
+  }
+
+  .split-card {
+    padding: 40px 30px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .split-card.cold {
+    background: rgba(27, 79, 114, 0.1);
+    border: 1px solid rgba(27, 79, 114, 0.3);
+  }
+
+  .split-card.warm {
+    background: rgba(201, 168, 76, 0.08);
+    border: 1px solid rgba(201, 168, 76, 0.3);
+  }
+
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .card-item {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--grey);
+    line-height: 1.7;
+    padding-left: 15px;
+    border-left: 2px solid rgba(255,255,255,0.1);
+  }
+
+  .card-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    margin-top: 15px;
+  }
+
+  /* JOURNEY PHASES */
+  .phases-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .phase-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 25px;
+    padding: 25px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.03);
+    animation: phaseReveal 0.6s ease forwards;
+    opacity: 0;
+  }
+
+  @keyframes phaseReveal {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .phase-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+    min-width: 50px;
+    opacity: 0.4;
+  }
+
+  .phase-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .phase-desc {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--grey);
+    line-height: 1.6;
+  }
+
+  /* CLOSING QUOTE */
+  .closing-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.4rem, 3.5vw, 2.8rem);
+    font-weight: 300;
+    font-style: italic;
+    text-align: center;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.85);
+    max-width: 800px;
+    position: relative;
+  }
+
+  .closing-quote::before {
+    content: '"';
+    font-size: 8rem;
+    color: var(--gold);
+    opacity: 0.15;
+    position: absolute;
+    top: -40px;
+    left: -20px;
+    line-height: 1;
+    font-style: normal;
+  }
+
+  /* COPYRIGHT */
+  .copyright {
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.2);
+    z-index: 100;
+  }
+
+  /* NAVIGATION */
+  .nav {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 100;
+  }
+
+  .nav-btn {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: white;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-btn:hover {
+    background: rgba(201,168,76,0.2);
+    border-color: var(--gold);
+  }
+
+  .nav-counter {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    color: var(--grey);
+    min-width: 60px;
+    text-align: center;
+  }
+
+  /* PROGRESS BAR */
+  .progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #9B2335, #C4622D, #C9A84C, #2D6A4F, #1B4F72, #4A235A, #7D3C98);
+    transition: width 0.8s ease;
+    z-index: 100;
+  }
+
+  /* SINGLE MASK SLIDE */
+  .mask-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+  }
+
+  .mask-big-circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    position: relative;
+  }
+
+  .mask-big-circle::after {
+    content: '';
+    position: absolute;
+    inset: -10px;
+    border-radius: 50%;
+    background: inherit;
+    opacity: 0.15;
+    filter: blur(20px);
+  }
+
+  /* GLOW EFFECTS */
+  .glow-red { text-shadow: 0 0 40px rgba(155,35,53,0.8); }
+  .glow-orange { text-shadow: 0 0 40px rgba(196,98,45,0.8); }
+  .glow-yellow { text-shadow: 0 0 40px rgba(201,168,76,0.8); }
+  .glow-green { text-shadow: 0 0 40px rgba(45,106,79,0.8); }
+  .glow-blue { text-shadow: 0 0 40px rgba(27,79,114,0.8); }
+  .glow-indigo { text-shadow: 0 0 40px rgba(74,35,90,0.8); }
+  .glow-violet { text-shadow: 0 0 40px rgba(125,60,152,0.8); }
+
+  /* ANIMATIONS */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes pulseGold {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+
+  .animate-fadeInUp { animation: fadeInUp 1s ease forwards; }
+  .animate-fadeIn { animation: fadeIn 1.2s ease forwards; }
+  .animate-scaleIn { animation: scaleIn 0.8s ease forwards; }
+
+  .delay-1 { animation-delay: 0.3s; opacity: 0; }
+  .delay-2 { animation-delay: 0.6s; opacity: 0; }
+  .delay-3 { animation-delay: 0.9s; opacity: 0; }
+  .delay-4 { animation-delay: 1.2s; opacity: 0; }
+  .delay-5 { animation-delay: 1.5s; opacity: 0; }
+  .delay-6 { animation-delay: 1.8s; opacity: 0; }
+  .delay-7 { animation-delay: 2.1s; opacity: 0; }
+
+  /* SLIDE COUNTER DOTS */
+  .dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    transition: all 0.3s ease;
+  }
+
+  .dot.active {
+    background: var(--gold);
+    transform: scale(1.4);
+  }
+
+  /* AUTOPLAY INDICATOR */
+  .autoplay-btn {
+    background: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--grey);
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: all 0.3s;
+  }
+
+  .autoplay-btn:hover, .autoplay-btn.active {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  /* KEYBOARD HINT */
+  .keyboard-hint {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.2);
+    z-index: 100;
+  }
+</style>
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div class="progress" id="progress"></div>
+
+<!-- COPYRIGHT -->
+<div class="copyright">© Céline Bourbon — Méthode V.A.L.E.U.R© — Tous droits réservés</div>
+
+<!-- KEYBOARD HINT -->
+<div class="keyboard-hint">← → ou clic pour naviguer</div>
+
+<!-- PARTICLES -->
+<div class="particles" id="particles"></div>
+
+<!-- ============ SLIDES ============ -->
+
+<!-- SLIDE 1 — TITRE -->
+<div class="slide bg-gradient-violet active" id="slide-0">
+  <div class="label animate-fadeIn">Céline Bourbon · Psychologue</div>
+  <div class="title-main title-gradient animate-fadeInUp delay-1">V.A.L.E.U.R©</div>
+  <div class="spacer-sm"></div>
+  <div class="subtitle animate-fadeIn delay-2">De la peur à la joie d'être soi</div>
+  <div class="divider animate-fadeIn delay-3"></div>
+  <div class="body-text animate-fadeIn delay-4" style="font-size:0.95rem; color: var(--grey);">
+    Fondé sur le livre "De la peur à la joie d'être soi" · Éditions L'Harmattan
+  </div>
+</div>
+
+<!-- SLIDE 2 — QUESTION CHOC -->
+<div class="slide bg-navy" id="slide-1">
+  <div class="label animate-fadeIn">Le vrai problème</div>
+  <div class="headline animate-fadeInUp delay-1">
+    Et si le problème<br>n'était pas l'anxiété...
+  </div>
+  <div class="spacer"></div>
+  <div class="headline animate-fadeInUp delay-2" style="color: var(--gold);">
+    ...mais ce qui vous empêche<br><em>d'en sortir ?</em>
+  </div>
+</div>
+
+<!-- SLIDE 3 — RECONNAISSANCE 1 -->
+<div class="slide bg-navy" id="slide-2">
+  <div class="label animate-fadeIn">Vous reconnaissez-vous ?</div>
+  <div class="spacer-sm"></div>
+  <div class="body-text animate-fadeInUp delay-1">
+    Vous avez tout essayé.<br>
+    Vous avez parlé pendant des mois, peut-être des années.
+  </div>
+  <div class="spacer"></div>
+  <div class="accent-text animate-fadeInUp delay-2">
+    Mais au fond,<br>rien n'a vraiment changé.
+  </div>
+  <div class="spacer"></div>
+  <div class="body-text animate-fadeInUp delay-3">
+    L'anxiété revient. Les mêmes schémas se répètent.<br>
+    La même fatigue intérieure.
+  </div>
+</div>
+
+<!-- SLIDE 4 — RECONNAISSANCE 2 -->
+<div class="slide bg-navy" id="slide-3">
+  <div class="label animate-fadeIn">Vous reconnaissez-vous ?</div>
+  <div class="spacer"></div>
+  <div class="body-text animate-fadeInUp delay-1">Vous tournez en boucle dans les mêmes schémas.</div>
+  <div class="divider"></div>
+  <div class="body-text animate-fadeInUp delay-2">Vous contrôlez tout pour ne pas souffrir.<br>Mais l'anxiété ne lâche jamais.</div>
+  <div class="divider"></div>
+  <div class="body-text animate-fadeInUp delay-3">Vous avez essayé des thérapies, lu des livres.<br>Pourtant, le fond ne change pas.</div>
+  <div class="divider"></div>
+  <div class="body-text animate-fadeInUp delay-4">Vous vous sentez <strong>figé(e)</strong>.<br>Quelque chose vous empêche d'avancer.</div>
+</div>
+
+<!-- SLIDE 5 — RÉVÉLATION -->
+<div class="slide bg-gradient-violet" id="slide-4">
+  <div class="spacer"></div>
+  <div class="reveal-text animate-scaleIn" style="font-size: clamp(2rem, 5vw, 4rem);">
+    Ce n'est pas<br><span style="color: var(--gold);">vous</span> le problème.
+  </div>
+  <div class="spacer"></div>
+  <div class="animate-fadeInUp delay-2">
+    <div class="divider"></div>
+  </div>
+  <div class="headline animate-fadeInUp delay-3" style="font-size: clamp(1.5rem, 3.5vw, 2.8rem);">
+    Ce sont vos <em>masques.</em>
+  </div>
+</div>
+
+<!-- SLIDE 6 — EXPLICATION MASQUES -->
+<div class="slide bg-navy" id="slide-5">
+  <div class="label animate-fadeIn">Comprendre</div>
+  <div class="spacer-sm"></div>
+  <div class="headline animate-fadeInUp delay-1" style="font-size: clamp(1.4rem, 3vw, 2.4rem);">
+    Au fil des blessures et des peurs,<br>
+    vous avez construit un <em>personnage</em>
+  </div>
+  <div class="spacer"></div>
+  <div class="body-text animate-fadeInUp delay-2">
+    Une version défensive de vous-même.<br>
+    Ce personnage porte des masques sensés vous protéger<br>
+    de la souffrance, du rejet, de la vulnérabilité.
+  </div>
+  <div class="spacer"></div>
+  <div class="accent-text animate-fadeInUp delay-3">
+    Mais ces masques sont devenus votre prison.
+  </div>
+</div>
+
+<!-- SLIDE 7 — LES 7 MASQUES -->
+<div class="slide bg-navy" id="slide-6">
+  <div class="label animate-fadeIn">Les 7 masques qui empêchent d'être soi</div>
+  <div class="spacer-sm"></div>
+  <div class="masks-grid">
+    <div class="mask-item" style="animation-delay: 0.2s">
+      <div class="mask-circle" style="background: var(--red); box-shadow: 0 0 25px rgba(155,35,53,0.5)">🎭</div>
+      <div class="mask-label" style="color: #c44">ROUGE<br><span style="opacity:0.6">Mort · Maladie</span></div>
+    </div>
+    <div class="mask-item" style="animation-delay: 0.4s">
+      <div class="mask-circle" style="background: var(--orange); box-shadow: 0 0 25px rgba(196,98,45,0.5)">🎭</div>
+      <div class="mask-label" style="color: #c84">ORANGE<br><span style="opacity:0.6">Souffrance</span></div>
+    </div>
+    <div class="mask-item" style="animation-delay: 0.6s">
+      <div class="mask-circle" style="background: var(--yellow); box-shadow: 0 0 25px rgba(201,168,76,0.5)">🎭</div>
+      <div class="mask-label" style="color: #ca8">JAUNE<br><span style="opacity:0.6">Inconnu</span></div>
+    </div>
+    <div class="mask-item" style="animation-delay: 0.8s">
+      <div class="mask-circle" style="background: var(--green); box-shadow: 0 0 25px rgba(45,106,79,0.5)">🎭</div>
+      <div class="mask-label" style="color: #4a8">VERT<br><span style="opacity:0.6">Rejet</span></div>
+    </div>
+    <div class="mask-item" style="animation-delay: 1.0s">
+      <div class="mask-circle" style="background: var(--blue); box-shadow: 0 0 25px rgba(27,79,114,0.5)">🎭</div>
+      <div class="mask-label" style="color: #48c">BLEU<br><span style="opacity:0.6">Impuissance</span></div>
+    </div>
+    <div class="mask-item" style="animation-delay: 1.2s">
+      <div class="mask-circle" style="background: var(--indigo); box-shadow: 0 0 25px rgba(74,35,90,0.5)">🎭</div>
+      <div class="mask-label" style="color: #84a">INDIGO<br><span style="opacity:0.6">Échec</span></div>
+    </div>
+    <div class="mask-item" style="animation-delay: 1.4s">
+      <div class="mask-circle" style="background: var(--violet); box-shadow: 0 0 25px rgba(125,60,152,0.5)">🎭</div>
+      <div class="mask-label" style="color: #a6c">VIOLET<br><span style="opacity:0.6">Faux self</span></div>
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <div class="body-text animate-fadeIn delay-7" style="font-size:1rem; font-style:italic; color: var(--grey);">
+    Vous n'êtes pas vos masques. Vous êtes ce qu'ils recouvrent.
+  </div>
+</div>
+
+<!-- SLIDE 8 — PERSONNAGE VS NATURE AUTHENTIQUE -->
+<div class="slide bg-split" id="slide-7">
+  <div class="label animate-fadeIn" style="text-align:center">Votre réalité vs votre potentiel</div>
+  <div class="spacer-sm"></div>
+  <div class="split-container animate-fadeInUp delay-1">
+    <div class="split-card cold">
+      <div class="card-title" style="color: #8bb4d4">Votre Personnage</div>
+      <div class="card-item">Peurs figées, contrôle, rigidité</div>
+      <div class="card-item">Schémas répétitifs, réactions automatiques</div>
+      <div class="card-item">Tension permanente, épuisement</div>
+      <div class="card-item">Coupé(e) de vos émotions vraies</div>
+      <div class="card-quote" style="color: #8bb4d4">"Je subis"</div>
+    </div>
+    <div class="split-card warm">
+      <div class="card-title" style="color: var(--gold)">Votre Nature Authentique</div>
+      <div class="card-item">Vérité intérieure, valeurs profondes</div>
+      <div class="card-item">Élan vital, liberté, fluidité</div>
+      <div class="card-item">Choix conscient, spontanéité</div>
+      <div class="card-item">Joie d'être soi, pleinement vivant(e)</div>
+      <div class="card-quote" style="color: var(--gold)">"Je choisis"</div>
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <div class="body-text animate-fadeIn delay-3" style="font-size:0.95rem; font-style:italic;">
+    Votre nature authentique est intacte — les masques la recouvrent,<br>mais ne l'ont jamais détruite.
+  </div>
+</div>
+
+<!-- SLIDE 9 — LA MÉTHODE -->
+<div class="slide bg-gradient-violet" id="slide-8">
+  <div class="label animate-fadeIn">La solution</div>
+  <div class="title-main title-gradient animate-scaleIn delay-1">V.A.L.E.U.R©</div>
+  <div class="spacer-sm"></div>
+  <div class="subtitle animate-fadeIn delay-2">6 étapes vers la libération</div>
+  <div class="spacer"></div>
+  <div class="body-text animate-fadeInUp delay-3">
+    Un parcours structuré, concret, transformateur.<br>
+    Pas des mois à parler de vos problèmes.<br>
+    <strong>Une identification précise de ce qui vous bloque.</strong>
+  </div>
+</div>
+
+<!-- SLIDE 10 — LES 6 ÉTAPES -->
+<div class="slide bg-navy" id="slide-9">
+  <div class="label animate-fadeIn">Le parcours</div>
+  <div class="steps-list">
+    <div class="step-item" style="color: var(--red); animation-delay: 0.2s">
+      <div class="step-letter" style="color: var(--red)">V</div>
+      <div class="step-content">
+        <div class="step-title">Voir</div>
+        <div class="step-desc">Je vois le masque qui s'active et la peur qui le nourrit.</div>
+      </div>
+    </div>
+    <div class="step-item" style="color: var(--orange); animation-delay: 0.4s">
+      <div class="step-letter" style="color: var(--orange)">A</div>
+      <div class="step-content">
+        <div class="step-title">Accueillir</div>
+        <div class="step-desc">J'accueille l'émotion sous le masque, sans fuir.</div>
+      </div>
+    </div>
+    <div class="step-item" style="color: var(--yellow); animation-delay: 0.6s">
+      <div class="step-letter" style="color: var(--yellow)">L</div>
+      <div class="step-content">
+        <div class="step-title">Localiser</div>
+        <div class="step-desc">Je localise dans mon corps où le masque se manifeste.</div>
+      </div>
+    </div>
+    <div class="step-item" style="color: var(--green); animation-delay: 0.8s">
+      <div class="step-letter" style="color: var(--green)">E</div>
+      <div class="step-content">
+        <div class="step-title">Explorer</div>
+        <div class="step-desc">J'explore le conflit entre mon masque et ma valeur authentique.</div>
+      </div>
+    </div>
+    <div class="step-item" style="color: var(--blue); animation-delay: 1.0s">
+      <div class="step-letter" style="color: var(--blue)">U</div>
+      <div class="step-content">
+        <div class="step-title">Unifier</div>
+        <div class="step-desc">J'intègre la part blessée et je choisis ma valeur.</div>
+      </div>
+    </div>
+    <div class="step-item" style="color: var(--violet); animation-delay: 1.2s">
+      <div class="step-letter" style="color: var(--violet)">R</div>
+      <div class="step-content">
+        <div class="step-title">Renforcer</div>
+        <div class="step-desc">J'ancre le nouveau choix pour qu'il devienne ma nouvelle voie.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 11 — LE VOYAGE -->
+<div class="slide bg-navy" id="slide-10">
+  <div class="label animate-fadeIn">Ce que vous allez vivre</div>
+  <div class="spacer-sm"></div>
+  <div class="phases-container">
+    <div class="phase-item" style="border-left: 3px solid var(--blue); animation-delay: 0.3s">
+      <div class="phase-number" style="color: var(--blue)">01</div>
+      <div>
+        <div class="phase-title" style="color: var(--blue)">La Révélation</div>
+        <div class="phase-desc">Vous découvrez vos masques dominants et comprenez enfin pourquoi vous tournez en rond. Cette première prise de conscience change tout.</div>
+      </div>
+    </div>
+    <div class="phase-item" style="border-left: 3px solid var(--orange); animation-delay: 0.6s">
+      <div class="phase-number" style="color: var(--orange)">02</div>
+      <div>
+        <div class="phase-title" style="color: var(--orange)">La Confrontation</div>
+        <div class="phase-desc">Vous regardez vos peurs en face. Ce n'est pas facile. Ce n'est pas confortable. Mais c'est courageux. Et c'est là que tout commence à bouger.</div>
+      </div>
+    </div>
+    <div class="phase-item" style="border-left: 3px solid var(--gold); animation-delay: 0.9s">
+      <div class="phase-number" style="color: var(--gold)">03</div>
+      <div>
+        <div class="phase-title" style="color: var(--gold)">La Libération</div>
+        <div class="phase-desc">Les masques se fissurent. Vous commencez à sentir la différence entre vivre masqué et vivre vrai. C'est physique, pas seulement intellectuel.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 12 — CE QUE VOUS POUVEZ OBTENIR -->
+<div class="slide bg-gradient-gold" id="slide-11">
+  <div class="label animate-fadeIn">Ce que vous pouvez obtenir</div>
+  <div class="spacer-sm"></div>
+  <div class="steps-list" style="gap: 12px;">
+    <div class="step-item" style="color: var(--gold); border-left: 3px solid var(--gold); animation-delay: 0.2s; padding: 14px 20px;">
+      <div style="color: var(--gold); font-size: 1.2rem">✦</div>
+      <div class="step-desc" style="color: #ddd; font-size: 1rem;">Sortir enfin des schémas répétitifs qui vous épuisent depuis trop longtemps</div>
+    </div>
+    <div class="step-item" style="color: var(--gold); border-left: 3px solid var(--gold); animation-delay: 0.4s; padding: 14px 20px;">
+      <div style="color: var(--gold); font-size: 1.2rem">✦</div>
+      <div class="step-desc" style="color: #ddd; font-size: 1rem;">Comprendre ce qui vous bloque et savoir exactement quoi en faire</div>
+    </div>
+    <div class="step-item" style="color: var(--gold); border-left: 3px solid var(--gold); animation-delay: 0.6s; padding: 14px 20px;">
+      <div style="color: var(--gold); font-size: 1.2rem">✦</div>
+      <div class="step-desc" style="color: #ddd; font-size: 1rem;">Ne plus être gouverné(e) par des peurs qui ne vous appartiennent plus</div>
+    </div>
+    <div class="step-item" style="color: var(--gold); border-left: 3px solid var(--gold); animation-delay: 0.8s; padding: 14px 20px;">
+      <div style="color: var(--gold); font-size: 1.2rem">✦</div>
+      <div class="step-desc" style="color: #ddd; font-size: 1rem;">Retrouver votre élan vital, votre spontanéité, votre liberté intérieure</div>
+    </div>
+    <div class="step-item" style="color: var(--gold); border-left: 3px solid var(--gold); animation-delay: 1.0s; padding: 14px 20px;">
+      <div style="color: var(--gold); font-size: 1.2rem">✦</div>
+      <div class="step-desc" style="color: #ddd; font-size: 1rem;">Ressentir la joie d'être vous — sans masque, sans rôle, sans prison</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 13 — CITATION FINALE -->
+<div class="slide bg-gradient-violet" id="slide-12">
+  <div class="closing-quote animate-fadeIn delay-1">
+    Rien ne vous enferme plus<br>que la peur d'avoir mal.<br><br>
+    Mais rien ne vous libère autant<br>que le courage de la traverser.
+  </div>
+</div>
+
+<!-- SLIDE 14 — CLÔTURE -->
+<div class="slide bg-navy" id="slide-13">
+  <div class="title-main title-gradient animate-scaleIn">V.A.L.E.U.R©</div>
+  <div class="spacer-sm"></div>
+  <div class="subtitle animate-fadeIn delay-1">De la peur à la joie d'être soi</div>
+  <div class="divider animate-fadeIn delay-2"></div>
+  <div class="body-text animate-fadeIn delay-3" style="font-size: 0.95rem; color: var(--grey);">
+    Céline Bourbon · Psychologue<br>
+    Auteure de "De la peur à la joie d'être soi" · Éditions L'Harmattan
+  </div>
+  <div class="spacer"></div>
+  <div class="body-text animate-fadeIn delay-4" style="font-size: 0.8rem; color: rgba(255,255,255,0.2); letter-spacing: 0.2em; text-transform: uppercase;">
+    © Méthode V.A.L.E.U.R© · Tous droits réservés
+  </div>
+</div>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+  <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">←</button>
+  <div class="dots" id="dots"></div>
+  <div class="nav-counter" id="counter">1 / 14</div>
+  <button class="autoplay-btn" id="autoBtn" onclick="toggleAutoplay()">▶ AUTO</button>
+  <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">→</button>
+</nav>
+
+<script>
+  const totalSlides = 14;
+  let current = 0;
+  let autoplay = false;
+  let autoTimer = null;
+  const SLIDE_DURATION = 6000;
+
+  // Create particles
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 25; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.cssText = `
+      left: ${Math.random() * 100}%;
+      width: ${Math.random() * 3 + 1}px;
+      height: ${Math.random() * 3 + 1}px;
+      animation-duration: ${Math.random() * 15 + 10}s;
+      animation-delay: ${Math.random() * 10}s;
+      opacity: ${Math.random() * 0.4};
+    `;
+    container.appendChild(p);
+  }
+
+  // Create dots
+  const dotsContainer = document.getElementById('dots');
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => goToSlide(i);
+    dot.style.cursor = 'pointer';
+    dotsContainer.appendChild(dot);
+  }
+
+  function updateUI() {
+    document.getElementById('counter').textContent = `${current + 1} / ${totalSlides}`;
+    document.getElementById('progress').style.width = `${((current + 1) / totalSlides) * 100}%`;
+    document.querySelectorAll('.dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
+  }
+
+  function goToSlide(n) {
+    document.getElementById(`slide-${current}`).classList.remove('active');
+    current = Math.max(0, Math.min(n, totalSlides - 1));
+    const slide = document.getElementById(`slide-${current}`);
+    slide.classList.add('active');
+
+    // Restart animations on active slide
+    slide.querySelectorAll('[class*="animate-"], [class*="delay-"], .mask-item, .step-item, .phase-item').forEach(el => {
+      el.style.animation = 'none';
+      el.offsetHeight; // reflow
+      el.style.animation = '';
+    });
+
+    updateUI();
+  }
+
+  function changeSlide(dir) {
+    goToSlide(current + dir);
+  }
+
+  function toggleAutoplay() {
+    autoplay = !autoplay;
+    const btn = document.getElementById('autoBtn');
+    btn.classList.toggle('active', autoplay);
+    btn.textContent = autoplay ? '⏸ AUTO' : '▶ AUTO';
+    if (autoplay) {
+      autoTimer = setInterval(() => {
+        if (current < totalSlides - 1) {
+          changeSlide(1);
+        } else {
+          goToSlide(0);
+        }
+      }, SLIDE_DURATION);
+    } else {
+      clearInterval(autoTimer);
+    }
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') changeSlide(1);
+    if (e.key === 'ArrowLeft') changeSlide(-1);
+  });
+
+  // Click navigation
+  document.addEventListener('click', e => {
+    if (!e.target.closest('nav') && !e.target.closest('.nav')) {
+      changeSlide(1);
+    }
+  });
+
+  updateUI();
+</script>
+</body>
+</html>
