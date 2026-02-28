@@ -177,53 +177,113 @@
     margin-bottom: 20px;
   }
 
-  /* MASKS GRID */
+  /* MASKS GRID — REDESIGNED */
   .masks-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 15px;
+    gap: 12px;
     width: 100%;
-    max-width: 900px;
+    max-width: 1100px;
   }
 
   .mask-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    animation: maskReveal 0.6s ease forwards;
+    gap: 0;
+    animation: maskReveal 0.7s cubic-bezier(0.22,1,0.36,1) forwards;
     opacity: 0;
+    cursor: default;
+  }
+
+  .mask-item:hover .mask-card {
+    transform: translateY(-8px) scale(1.04);
   }
 
   @keyframes maskReveal {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(30px) scale(0.9); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
   }
 
-  .mask-circle {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
+  .mask-card {
+    width: 100%;
+    border-radius: 10px;
+    padding: 18px 10px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mask-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    opacity: 0.08;
+    background: currentColor;
+  }
+
+  .mask-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: currentColor;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .mask-icon {
+    width: 52px;
+    height: 64px;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: white;
-    position: relative;
-    box-shadow: 0 0 30px currentColor;
   }
 
-  .mask-label {
-    font-family: 'Jost', sans-serif;
-    font-size: 0.65rem;
-    font-weight: 400;
-    letter-spacing: 0.1em;
+  /* SVG MASK SHAPE */
+  .mask-svg {
+    width: 52px;
+    height: 64px;
+    filter: drop-shadow(0 0 12px currentColor);
+  }
+
+  .mask-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     text-align: center;
-    color: var(--grey);
+    line-height: 1;
+  }
+
+  .mask-fear {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-align: center;
+    color: rgba(255,255,255,0.5);
     line-height: 1.4;
+    padding: 0 4px;
+  }
+
+  .mask-effect {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 300;
+    font-style: italic;
+    text-align: center;
+    line-height: 1.3;
+    padding: 6px 8px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    width: 100%;
+    color: rgba(255,255,255,0.35);
   }
 
   /* STEPS */
@@ -702,42 +762,138 @@
   </div>
 </div>
 
-<!-- SLIDE 7 — LES 7 MASQUES -->
+<!-- SLIDE 7 — LES 7 MASQUES REDESIGNÉ -->
 <div class="slide bg-navy" id="slide-6">
   <div class="label animate-fadeIn">Les 7 masques qui empêchent d'être soi</div>
   <div class="spacer-sm"></div>
+
   <div class="masks-grid">
-    <div class="mask-item" style="animation-delay: 0.2s">
-      <div class="mask-circle" style="background: var(--red); box-shadow: 0 0 25px rgba(155,35,53,0.5)">🎭</div>
-      <div class="mask-label" style="color: #c44">ROUGE<br><span style="opacity:0.6">Mort · Maladie</span></div>
+
+    <!-- ROUGE -->
+    <div class="mask-item" style="animation-delay: 0.15s; color: #c0392b">
+      <div class="mask-card" style="color: #c0392b; border: 1px solid rgba(192,57,43,0.25)">
+        <svg class="mask-svg" style="color:#c0392b" viewBox="0 0 52 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M26 2 C10 2 4 14 4 28 C4 46 14 58 26 62 C38 58 48 46 48 28 C48 14 42 2 26 2Z" fill="rgba(192,57,43,0.15)" stroke="#c0392b" stroke-width="1.5"/>
+          <ellipse cx="18" cy="26" rx="5" ry="3" fill="rgba(192,57,43,0.4)"/>
+          <ellipse cx="34" cy="26" rx="5" ry="3" fill="rgba(192,57,43,0.4)"/>
+          <path d="M18 38 Q26 34 34 38" stroke="#c0392b" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <circle cx="8" cy="28" r="3" fill="rgba(192,57,43,0.3)" stroke="#c0392b" stroke-width="1"/>
+          <circle cx="44" cy="28" r="3" fill="rgba(192,57,43,0.3)" stroke="#c0392b" stroke-width="1"/>
+        </svg>
+        <div class="mask-name" style="color: #e05a4e">Rouge</div>
+        <div class="mask-fear">Peur de la mort<br>et de la maladie</div>
+        <div class="mask-effect">Bride la sécurité intérieure</div>
+      </div>
     </div>
-    <div class="mask-item" style="animation-delay: 0.4s">
-      <div class="mask-circle" style="background: var(--orange); box-shadow: 0 0 25px rgba(196,98,45,0.5)">🎭</div>
-      <div class="mask-label" style="color: #c84">ORANGE<br><span style="opacity:0.6">Souffrance</span></div>
+
+    <!-- ORANGE -->
+    <div class="mask-item" style="animation-delay: 0.3s; color: #c4622d">
+      <div class="mask-card" style="color: #c4622d; border: 1px solid rgba(196,98,45,0.25)">
+        <svg class="mask-svg" style="color:#c4622d" viewBox="0 0 52 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M26 2 C10 2 4 14 4 28 C4 46 14 58 26 62 C38 58 48 46 48 28 C48 14 42 2 26 2Z" fill="rgba(196,98,45,0.15)" stroke="#c4622d" stroke-width="1.5"/>
+          <ellipse cx="18" cy="26" rx="5" ry="3" fill="rgba(196,98,45,0.4)"/>
+          <ellipse cx="34" cy="26" rx="5" ry="3" fill="rgba(196,98,45,0.4)"/>
+          <path d="M18 40 Q26 44 34 40" stroke="#c4622d" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <circle cx="8" cy="28" r="3" fill="rgba(196,98,45,0.3)" stroke="#c4622d" stroke-width="1"/>
+          <circle cx="44" cy="28" r="3" fill="rgba(196,98,45,0.3)" stroke="#c4622d" stroke-width="1"/>
+        </svg>
+        <div class="mask-name" style="color: #e07840">Orange</div>
+        <div class="mask-fear">Peur de la souffrance émotionnelle</div>
+        <div class="mask-effect">Bride l'ouverture émotionnelle</div>
+      </div>
     </div>
-    <div class="mask-item" style="animation-delay: 0.6s">
-      <div class="mask-circle" style="background: var(--yellow); box-shadow: 0 0 25px rgba(201,168,76,0.5)">🎭</div>
-      <div class="mask-label" style="color: #ca8">JAUNE<br><span style="opacity:0.6">Inconnu</span></div>
+
+    <!-- JAUNE -->
+    <div class="mask-item" style="animation-delay: 0.45s; color: #c9a84c">
+      <div class="mask-card" style="color: #c9a84c; border: 1px solid rgba(201,168,76,0.25)">
+        <svg class="mask-svg" style="color:#c9a84c" viewBox="0 0 52 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M26 2 C10 2 4 14 4 28 C4 46 14 58 26 62 C38 58 48 46 48 28 C48 14 42 2 26 2Z" fill="rgba(201,168,76,0.15)" stroke="#c9a84c" stroke-width="1.5"/>
+          <path d="M14 24 Q18 20 22 24" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <path d="M30 24 Q34 20 38 24" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <path d="M18 38 Q26 36 34 38" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <circle cx="8" cy="28" r="3" fill="rgba(201,168,76,0.3)" stroke="#c9a84c" stroke-width="1"/>
+          <circle cx="44" cy="28" r="3" fill="rgba(201,168,76,0.3)" stroke="#c9a84c" stroke-width="1"/>
+        </svg>
+        <div class="mask-name" style="color: #d4b85a">Jaune</div>
+        <div class="mask-fear">Peur de l'inconnu<br>et de l'incertitude</div>
+        <div class="mask-effect">Bride la confiance et le lâcher-prise</div>
+      </div>
     </div>
-    <div class="mask-item" style="animation-delay: 0.8s">
-      <div class="mask-circle" style="background: var(--green); box-shadow: 0 0 25px rgba(45,106,79,0.5)">🎭</div>
-      <div class="mask-label" style="color: #4a8">VERT<br><span style="opacity:0.6">Rejet</span></div>
+
+    <!-- VERT -->
+    <div class="mask-item" style="animation-delay: 0.6s; color: #2d6a4f">
+      <div class="mask-card" style="color: #2d6a4f; border: 1px solid rgba(45,106,79,0.35)">
+        <svg class="mask-svg" style="color:#2d6a4f" viewBox="0 0 52 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M26 2 C10 2 4 14 4 28 C4 46 14 58 26 62 C38 58 48 46 48 28 C48 14 42 2 26 2Z" fill="rgba(45,106,79,0.15)" stroke="#2d6a4f" stroke-width="1.5"/>
+          <path d="M14 26 Q18 30 22 26" stroke="#2d6a4f" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <path d="M30 26 Q34 30 38 26" stroke="#2d6a4f" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <path d="M16 38 Q26 42 36 38" stroke="#2d6a4f" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <circle cx="8" cy="28" r="3" fill="rgba(45,106,79,0.3)" stroke="#2d6a4f" stroke-width="1"/>
+          <circle cx="44" cy="28" r="3" fill="rgba(45,106,79,0.3)" stroke="#2d6a4f" stroke-width="1"/>
+        </svg>
+        <div class="mask-name" style="color: #3d8a64">Vert</div>
+        <div class="mask-fear">Peur du rejet<br>et de l'abandon</div>
+        <div class="mask-effect">Bride l'authenticité</div>
+      </div>
     </div>
-    <div class="mask-item" style="animation-delay: 1.0s">
-      <div class="mask-circle" style="background: var(--blue); box-shadow: 0 0 25px rgba(27,79,114,0.5)">🎭</div>
-      <div class="mask-label" style="color: #48c">BLEU<br><span style="opacity:0.6">Impuissance</span></div>
+
+    <!-- BLEU -->
+    <div class="mask-item" style="animation-delay: 0.75s; color: #1b4f72">
+      <div class="mask-card" style="color: #1b4f72; border: 1px solid rgba(27,79,114,0.4)">
+        <svg class="mask-svg" style="color:#1b6fa2" viewBox="0 0 52 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M26 2 C10 2 4 14 4 28 C4 46 14 58 26 62 C38 58 48 46 48 28 C48 14 42 2 26 2Z" fill="rgba(27,79,114,0.2)" stroke="#1b6fa2" stroke-width="1.5"/>
+          <rect x="14" y="23" width="10" height="6" rx="3" fill="rgba(27,111,162,0.4)" stroke="#1b6fa2" stroke-width="1"/>
+          <rect x="28" y="23" width="10" height="6" rx="3" fill="rgba(27,111,162,0.4)" stroke="#1b6fa2" stroke-width="1"/>
+          <path d="M18 39 L26 36 L34 39" stroke="#1b6fa2" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <circle cx="8" cy="28" r="3" fill="rgba(27,79,114,0.3)" stroke="#1b6fa2" stroke-width="1"/>
+          <circle cx="44" cy="28" r="3" fill="rgba(27,79,114,0.3)" stroke="#1b6fa2" stroke-width="1"/>
+        </svg>
+        <div class="mask-name" style="color: #2980b9">Bleu</div>
+        <div class="mask-fear">Peur de l'impuissance</div>
+        <div class="mask-effect">Bride l'affirmation de soi</div>
+      </div>
     </div>
-    <div class="mask-item" style="animation-delay: 1.2s">
-      <div class="mask-circle" style="background: var(--indigo); box-shadow: 0 0 25px rgba(74,35,90,0.5)">🎭</div>
-      <div class="mask-label" style="color: #84a">INDIGO<br><span style="opacity:0.6">Échec</span></div>
+
+    <!-- INDIGO -->
+    <div class="mask-item" style="animation-delay: 0.9s; color: #6c3483">
+      <div class="mask-card" style="color: #6c3483; border: 1px solid rgba(108,52,131,0.35)">
+        <svg class="mask-svg" style="color:#6c3483" viewBox="0 0 52 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M26 2 C10 2 4 14 4 28 C4 46 14 58 26 62 C38 58 48 46 48 28 C48 14 42 2 26 2Z" fill="rgba(108,52,131,0.15)" stroke="#6c3483" stroke-width="1.5"/>
+          <path d="M14 22 Q18 26 22 22" stroke="#6c3483" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <path d="M30 22 Q34 26 38 22" stroke="#6c3483" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <path d="M20 39 Q26 35 32 39" stroke="#6c3483" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <line x1="26" y1="10" x2="26" y2="16" stroke="#6c3483" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="8" cy="28" r="3" fill="rgba(108,52,131,0.3)" stroke="#6c3483" stroke-width="1"/>
+          <circle cx="44" cy="28" r="3" fill="rgba(108,52,131,0.3)" stroke="#6c3483" stroke-width="1"/>
+        </svg>
+        <div class="mask-name" style="color: #8e44ad">Indigo</div>
+        <div class="mask-fear">Peur de l'échec<br>et de l'inadéquation</div>
+        <div class="mask-effect">Bride la créativité et l'audace</div>
+      </div>
     </div>
-    <div class="mask-item" style="animation-delay: 1.4s">
-      <div class="mask-circle" style="background: var(--violet); box-shadow: 0 0 25px rgba(125,60,152,0.5)">🎭</div>
-      <div class="mask-label" style="color: #a6c">VIOLET<br><span style="opacity:0.6">Faux self</span></div>
+
+    <!-- VIOLET -->
+    <div class="mask-item" style="animation-delay: 1.05s; color: #7d3c98">
+      <div class="mask-card" style="color: #7d3c98; border: 1px solid rgba(125,60,152,0.35)">
+        <svg class="mask-svg" style="color:#7d3c98" viewBox="0 0 52 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M26 2 C10 2 4 14 4 28 C4 46 14 58 26 62 C38 58 48 46 48 28 C48 14 42 2 26 2Z" fill="rgba(125,60,152,0.15)" stroke="#7d3c98" stroke-width="1.5"/>
+          <ellipse cx="18" cy="26" rx="5" ry="4" fill="rgba(125,60,152,0.3)" stroke="#7d3c98" stroke-width="1"/>
+          <ellipse cx="34" cy="26" rx="5" ry="4" fill="rgba(125,60,152,0.3)" stroke="#7d3c98" stroke-width="1"/>
+          <path d="M20 39 Q26 43 32 39" stroke="#7d3c98" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <path d="M20 14 Q26 10 32 14" stroke="#7d3c98" stroke-width="1" stroke-linecap="round" fill="none" stroke-dasharray="2,2"/>
+          <circle cx="8" cy="28" r="3" fill="rgba(125,60,152,0.3)" stroke="#7d3c98" stroke-width="1"/>
+          <circle cx="44" cy="28" r="3" fill="rgba(125,60,152,0.3)" stroke="#7d3c98" stroke-width="1"/>
+        </svg>
+        <div class="mask-name" style="color: #9b59b6">Violet</div>
+        <div class="mask-fear">Perte d'identité<br>· Faux self</div>
+        <div class="mask-effect">Bride la capacité à évoluer</div>
+      </div>
     </div>
+
   </div>
-  <div class="spacer"></div>
-  <div class="body-text animate-fadeIn delay-7" style="font-size:1rem; font-style:italic; color: var(--grey);">
+
+  <div class="spacer-sm"></div>
+  <div class="body-text animate-fadeIn delay-7" style="font-size:0.95rem; font-style:italic; color: var(--grey);">
     Vous n'êtes pas vos masques. Vous êtes ce qu'ils recouvrent.
   </div>
 </div>
